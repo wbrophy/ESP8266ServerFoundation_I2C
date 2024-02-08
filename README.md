@@ -345,7 +345,7 @@ Essentially open the web interface and review the source code of each page for e
     let x_temp = loopTemp / x_averageTemp.length;
 
     x_f = (x_temp * 1.8) + 32;
-    document.getElementById('temperature').innerHTML = String(x_f.toFixed(0)) + "&degF";
+    document.getElementById('temperature').innerHTML = String(x_f.toFixed(0)) + "&deg;F";
     //document.getElementById('raw_data').innerHTML = e.data;
    };
   ```
