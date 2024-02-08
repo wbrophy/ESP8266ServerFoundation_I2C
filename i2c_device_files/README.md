@@ -33,7 +33,7 @@
       "value" : 0 <-- Value to write to register
      }
     ],
-   "userdata" : <-- User data (this is user defined data that will get passed passed along with the call to getdata() in the main loop
+   "userdata" : <-- User data (this is user defined data that will get passed with the call to getdata() in the main loop
     [
      {
       "accelerometer" :
