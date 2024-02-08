@@ -6,7 +6,7 @@
 
 - **Free**: open source software.  BE THE SAME.
 - **Dynamic**: Change the default interface, configure the WiFi using SPIFFS filesystem.
-  - **Work with (any) I2C device without reprogramming.**
+  - **Work with (any?) I2C device without reprogramming.**
 - **Webserver**: REST API.  Access Point Captive Portal.  Serve custom .cs, .js, .html.
 - **Websocket Server**: data feed provider.
 - **Rudimentary**: A basic building block for something more.
