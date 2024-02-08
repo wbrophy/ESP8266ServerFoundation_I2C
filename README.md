@@ -292,7 +292,7 @@ Essentially open the web interface and review the source code of each page for e
   ```
 
 - **Edit SPIFFS File**: `/applications/editspiffsfile`
-  - **filename**: `/applications/thermometer.html
+  - **filename**: `/applications/thermometer.html`
   ```
   <html lang='en'>
     <head>
