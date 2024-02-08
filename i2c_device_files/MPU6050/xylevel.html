@@ -1,0 +1,40 @@
+<html lang='en'>
+  <head>
+    <title>MPU6050 Accelerometer I2C 0x68 Example</title>
+    <meta http-equiv='Cache-Control' content='no-cache, no-store, must-revalidate' />
+    <meta http-equiv='Pragma' content='no-cache' />
+    <meta http-equiv='Expires' content='0' />
+    <link rel="stylesheet" href="xylevel.css">
+    <script src="xylevel.js"></script>
+  </head>
+  <body>
+    <div class='axis_container'>
+      <div class='axis_label'>X Axis</div>
+      <div class='axis_dial'></div>
+      <div class='axis_reticle'></div>
+      <div id='x_axis_indicator'>
+        <div class='axis_level'></div>
+        <div class='axis_label_left'>Left</div>
+        <div class='axis_label_right'>Right</div>
+      </div>
+      <div id='x_axis_degree' class='axis_degree'>00&deg;</div>
+    </div>
+    <div class='axis_container'>
+      <div class='axis_label'>Y Axis</div>
+      <div class='axis_dial'></div>
+      <div class='axis_reticle'></div>
+      <div id='y_axis_indicator'>
+        <div class='axis_level'></div>
+        <div class='axis_label_left'>Back</div>
+        <div class='axis_label_right'>Front</div>
+      </div>
+      <div id='y_axis_degree' class='axis_degree'>00&deg;</div>
+    </div>
+    <div>Socket Status: <span id="socket_status"></spam></div>
+    <div>x_device: <span id="x_device"></spam></div>
+    <div>x_var Data</div>
+    <div id='x_var_data'></div>
+    <div>Raw Data</div>
+    <div id='raw_data'></div>
+  </body>
+</html>
