@@ -79,11 +79,7 @@ void setup(void)
         {
           int x_Register = int(strtoul(objI2CBus["i2cbus"]["device"][i]["initialize"][j]["register"], null, 0));
           int x_Value = int(objI2CBus["i2cbus"]["device"][i]["initialize"][j]["value"]);
-          //Serial.println("wire.write : " + String(x_Register) + " -> " + String(x_Value));
-          Wire.beginTransmission(x_DeviceId);
-          Wire.write(x_Register);
-          Wire.write(x_Value);
-          objI2CBus["i2cbus"]["device"][i]["initialize"][j]["result"] = Wire.endTransmission(true);
+          objI2CBus["i2cbus"]["device"][i]["initialize"][j]["result"] = I2CwriteRegister(x_DeviceId, x_Register, x_Value, true);
           delay(int(objI2CBus["i2cbus"]["device"][i]["initialize"][j]["sleep"]) > 0 ? int(objI2CBus["i2cbus"]["device"][i]["initialize"][j]["sleep"]) : 0);
           Serial.println(JSON.stringify(objI2CBus["i2cbus"]["device"][i]["initialize"][j]));
         }
@@ -361,14 +357,11 @@ String getData() /*MODIFICATION*/
         int x_DeviceId = int(strtoul(objI2CBus["i2cbus"]["device"][i]["address"], null, 0));
         int x_Register = int(strtoul(objI2CBus["i2cbus"]["device"][i]["getdata"][0]["register"], null, 0));
         int x_Bytes = int(objI2CBus["i2cbus"]["device"][i]["getdata"][0]["bytes"]);
-        Wire.beginTransmission(x_DeviceId);
-        Wire.write(x_Register);
-        Wire.endTransmission(false);
-        Wire.requestFrom(x_DeviceId, x_Bytes, true);
-
-        for (int j = 0; j < x_Bytes; j++)
+        JSONVar x_Buffer = JSON.parse(I2CreadRegister(x_DeviceId, x_Register, x_Bytes));
+        
+        for (int j = 0; j < x_Buffer.length(); j++)
           {
-            byte x_Byte = Wire.read();
+            byte x_Byte = x_Buffer[j];
             objI2CBus["i2cbus"]["device"][i]["getdata"][0]["data"][j] = x_Byte;
           }
       }
@@ -376,6 +369,7 @@ String getData() /*MODIFICATION*/
     return JSON.stringify(objI2CBus);
   }
 ///////////////////////////////////////////////////////////////////////////
+
 
 ///////////////////////////////////////////////////////////////////////////
 String readFile(String strPath)
@@ -565,6 +559,38 @@ String ScanI2C()
     return JSON.stringify(x_i2cDevices);
   }
 /////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// /*MODIFICATION*/
+int I2CwriteRegister(int i2c_DeviceId, int i2c_Register, int i2c_Value, bool i2c_EndTransmission)
+  {
+          Wire.beginTransmission(i2c_DeviceId);
+          Wire.write(i2c_Register);
+          Wire.write(i2c_Value);
+          return Wire.endTransmission(i2c_EndTransmission);
+  }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// /*MODIFICATION*/
+String I2CreadRegister(int I2C_DeviceId, int I2C_Register, int I2C_Bytes)
+  {
+    JSONVar objI2Cdata;
+    
+    Wire.beginTransmission(I2C_DeviceId);
+    Wire.write(I2C_Register);
+    Wire.endTransmission(false);
+    Wire.requestFrom(I2C_DeviceId, I2C_Bytes, true);
+    
+    for (int j = 0; j < I2C_Bytes; j++)
+      {
+        byte I2C_Byte = Wire.read();
+        objI2Cdata[j] = I2C_Byte;
+      }
+    return JSON.stringify(objI2Cdata);
+  }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////////////////////////////
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length)
