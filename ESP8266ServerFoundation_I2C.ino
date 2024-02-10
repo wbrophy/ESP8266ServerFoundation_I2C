@@ -149,6 +149,7 @@ void setup(void)
   server.on("/", handleRoot);
   server.on("/api/scannetworks", handleScannetworks);
   server.on("/api/scani2cbus", handleScani2cbus); /*MODIFICATION*/
+  server.on("/api/i2creadregister", handleI2CreadRegister); /*MODIFICATION*/
   server.on("/api/readeeprom", handleReadEEPROM);
   server.on("/api/formatspiffs", handleFormatSPIFFS);
   server.on("/api/listspiffs", handleListSPIFFS);
@@ -308,6 +309,29 @@ void handleScani2cbus()
 void handleScannetworks() 
   { server.send(200, "application/json", ScanNetworks()); }
 ///////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////
+// /*MODIFICATION*/
+/////////////////////////////////////////////////////////
+void handleI2CreadRegister() 
+  {
+    JSONVar objRead;
+    int x_DeviceId = 0;
+    int x_Register = 0;
+    int x_Bytes = 0;
+    objRead["DeviceId"] = server.arg("i2cdevice");
+    objRead["Register"] = server.arg("i2cregister");
+    objRead["Bytes"] = server.arg("i2cbytes");
+
+    if (server.arg("i2cdevice") != "" && server.arg("i2cregister") != "" && server.arg("i2cbytes") != "")
+      {
+        x_DeviceId = int(strtoul(objRead["DeviceId"], null, 0));
+        x_Register = int(strtoul(objRead["Register"], null, 0));
+        x_Bytes = int(strtoul(objRead["Bytes"], null, 0));
+      }
+    server.send(200, "application/json", I2CreadRegister(x_DeviceId, x_Register, x_Bytes));
+  }
+/////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

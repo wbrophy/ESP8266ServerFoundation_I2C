@@ -64,6 +64,7 @@ Essentially open the web interface and review the source code of each page for e
 - **Read EEPROM**:  `/api/readeeprom`
 - **Read SPIFFS File**:  `/api/readspiffsfile?file=[filename]`
 - **Restart Device**:  `/api/restartesp`
+- **Read I2C Register**:  **`/api/i2creadregister?i2cdevice=[DeviceId]&i2cregister=[Register]&i2cregister=[BytesToRead]`**
 - **Scan I2C Bus**:  **`/api/scani2cbus`**
 - **Scan Networks**:  `/api/scannetworks`
 - **Websocket**:  `/applications/websocket`

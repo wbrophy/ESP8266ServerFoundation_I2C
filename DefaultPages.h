@@ -72,6 +72,7 @@ String strRootHTML = strHttpResponseHead + "<body>" "\n"
                      "<option value='/api/readspiffsfile' title='Usage:?file=[filename]'>Read SPIFFS File</option>" "\n"
                      "<option value='/api/restartesp'>Restart Device</option>" "\n"
                      "<option value='/api/scani2cbus'>Scan I2C Bus</option>" "\n" /*MODIFICATION*/
+                     "<option value='/api/i2creadregister'>Read I2C Register</option>" "\n" /*MODIFICATION*/
                      "<option value='/api/scannetworks'>Scan Networks</option>" "\n"
                      "<option value='/applications/websocket' selected>Websocket</option>" "\n"
                      "</select>" "\n"
@@ -93,6 +94,7 @@ String strRootHTML = strHttpResponseHead + "<body>" "\n"
                      "<li><a href='/api/readspiffsfile'>Read SPIFFS File</a></li>" "\n"
                      "<li><a href='/api/restartesp'>Restart Device</a></li>" "\n"
                      "<li><a href='/api/scani2cbus'>Scan I2C Bus</a></li>" "\n" /*MODIFICATION*/
+                     "<li><a href='/api/i2creadregister'>Read I2C Register</a></li>" "\n" /*MODIFICATION*/
                      "<li><a href='/api/scannetworks'>Scan Networks</a></li>" "\n"
                      "</ul>" "\n"
                      "</li>" "\n"
