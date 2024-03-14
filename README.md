@@ -133,9 +133,9 @@ Essentially open the web interface and review the source code of each page for e
         "offsetY" : 0,
         "offsetZ" : 0
        },
-      "thermostat" :
+      "thermometer" :
        {
-        "offsetTemperature" : 0
+        "offset" : 0
        }
      }
     ],
