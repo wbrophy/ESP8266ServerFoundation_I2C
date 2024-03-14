@@ -48,9 +48,9 @@
         "offsetY" : 0,
         "offsetZ" : 0
        },
-      "thermostat" :
+      "thermometer" :
        {
-        "offsetTemperature" : 0
+        "offset" : 0
        }
      }
     ],
