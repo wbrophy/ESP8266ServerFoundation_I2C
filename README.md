@@ -62,6 +62,7 @@ Essentially open the web interface and review the source code of each page for e
 - **Edit SPIFFS File**: `/applications/editspiffsfile`
 - **Format SPIFFS**:  `/api/formatspiffs'`
 - **Get Data**:  `/api/getdata`
+- **Get Network**:  `/api/getnetwork`
 - **List SPIFFS**:  `/api/listspiffs`
 - **Read EEPROM**:  `/api/readeeprom`
 - **Read SPIFFS File**:  `/api/readspiffsfile?file=[filename]`

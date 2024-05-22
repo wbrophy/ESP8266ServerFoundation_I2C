@@ -158,6 +158,7 @@ void setup(void)
   server.on("/api/readspiffsfile", handleReadSPIFFSfile);
   server.on("/api/deletespiffsfile", handleDeleteSPIFFSfile);
   server.on("/api/getdata", handleGetData);
+  server.on("/api/getnetwork", handleGetNetwork);
   server.on("/applications/websocket", handleWebSocket);
   server.on("/api/restartesp", handleRestart);
 
@@ -224,6 +225,11 @@ void handleListSPIFFS()
 /////////////////////////////////////////////////////////////////
 void handleReadEEPROM() 
   { server.send(200, "application/json", String(ReadEEPROM())); }
+/////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////
+void handleGetNetwork() 
+  { server.send(200, "application/json", String(GetNetwork())); }
 /////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////
@@ -339,7 +345,6 @@ void handleI2CreadRegister()
   }
 /////////////////////////////////////////////////////////
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void handleNotFound() 
   {
@@ -374,6 +379,21 @@ String deleteFile(String strPath)
     return JSON.stringify(x_file);
   }
 ////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+String GetNetwork()
+  {
+    JSONVar x_return;
+    x_return["ConnectionResult"] = WiFi.waitForConnectResult();
+    x_return["network"] = WiFi.SSID();
+    x_return["localIP"] = WiFi.localIP().toString();
+    x_return["macAddress"] = WiFi.macAddress();
+    x_return["hostname"] = WiFi.hostname();
+    x_return["gateway"] = WiFi.gatewayIP().toString();
+    x_return["dns"] = WiFi.dnsIP().toString();
+    return JSON.stringify(x_return);
+  }
+///////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////
 String getData() /*MODIFICATION*/
