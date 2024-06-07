@@ -189,6 +189,9 @@ void loop(void)
       
       if (strCommand == "delete")
         { Serial.println(deleteFile(strParameters)); }
+
+      if (strCommand == "write")
+        { Serial.println(writeFile(strParameters)); }
     }
   
   // Process DNS Requests
@@ -290,8 +293,11 @@ void handleDeleteSPIFFSfile()
 
 ///////////////////////////////////////////////////////////////////
 void handleSaveSPIFFSfile()
-  { // write this like handleDeleteSPIFFSfile
-    //Serial.println(server.arg("plain"));
+  {
+    JSONVar x_file = JSON.parse(server.arg("plain"));
+    server.send(200, "application/json", writeFile(server.arg("plain")));
+    
+    /*
     if (server.arg("plain") != "") 
       {
         Serial.println(server.arg("plain"));
@@ -305,6 +311,7 @@ void handleSaveSPIFFSfile()
         SPIFFS.end();
         server.send(200, "application/json", server.arg("plain"));
       }
+    */
   }
 ///////////////////////////////////////////////////////////////////
 
@@ -375,6 +382,22 @@ String deleteFile(String strPath)
     SPIFFS.begin();
     if (SPIFFS.exists(strPath)) { SPIFFS.remove(strPath); }
     x_file["status"] = SPIFFS.exists(strPath) ? false:true;
+    SPIFFS.end();
+    return JSON.stringify(x_file);
+  }
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+String writeFile(String strFile)
+  {
+    JSONVar x_file = JSON.parse(strFile);
+    String strPath = x_file["fileName"];
+    if (!strPath.startsWith("/")) { strPath = "/" + strPath; }
+    SPIFFS.begin();
+    File x_f = SPIFFS.open(strPath, "w");
+    x_f.print(String(x_file["content"]));
+    x_file["status"] = SPIFFS.exists(strPath) ? true:false;
+    x_f.close();
     SPIFFS.end();
     return JSON.stringify(x_file);
   }
